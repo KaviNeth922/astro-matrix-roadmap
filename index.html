@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroMatrix | Launch Roadmap</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --bg-card: #111111;
+            --neon-gold: #FFD700;
+            --neon-gold-dim: rgba(255, 215, 0, 0.15);
+            --text-light: #f8f9fa;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Inter', -apple-system, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Neon Gold Text Effects */
+        .text-neon-gold {
+            color: var(--neon-gold);
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5), 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 4rem 0 3rem;
+            text-align: center;
+            border-bottom: 1px solid var(--neon-gold-dim);
+            background: radial-gradient(circle at top, var(--neon-gold-dim) 0%, transparent 60%);
+        }
+
+        .hero-title {
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        /* Roadmap Timeline */
+        .roadmap-container {
+            position: relative;
+            padding: 3rem 0;
+        }
+
+        /* Center Line */
+        .roadmap-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--neon-gold), transparent);
+            z-index: 0;
+        }
+
+        .phase-card {
+            background-color: var(--bg-card);
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .phase-card:hover {
+            border-color: var(--neon-gold);
+            box-shadow: 0 0 20px var(--neon-gold-dim);
+            transform: translateY(-5px);
+        }
+
+        .phase-number {
+            display: inline-block;
+            background-color: var(--bg-dark);
+            color: var(--neon-gold);
+            border: 1px solid var(--neon-gold);
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 10px var(--neon-gold-dim);
+        }
+
+        .phase-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .task-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .task-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--neon-gold);
+            font-size: 0.8rem;
+        }
+
+        /* Timeline alignment */
+        .row-phase {
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .roadmap-container::before {
+                left: 1rem;
+            }
+            .phase-card {
+                margin-left: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title text-neon-gold">AstroMatrix</h1>
+            <p class="lead text-muted">16-Week Solo Developer Launch Roadmap</p>
+            <div class="d-inline-flex gap-3 mt-3">
+                <span class="badge border border-warning text-warning bg-transparent px-3 py-2">Oracle Cloud (ARM)</span>
+                <span class="badge border border-warning text-warning bg-transparent px-3 py-2">FastAPI + LanceDB</span>
+                <span class="badge border border-warning text-warning bg-transparent px-3 py-2">Flutter & Next.js</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <div class="container roadmap-container">
+        
+        <!-- Phase 1 -->
+        <div class="row row-phase">
+            <div class="col-md-5 text-md-end mb-4 mb-md-0">
+                <div class="phase-card">
+                    <div class="phase-number">WEEKS 1 - 3</div>
+                    <h3 class="phase-title text-neon-gold">Infrastructure & Core Math</h3>
+                    <ul class="task-list text-start">
+                        <li>Provision Oracle Cloud Always-Free Tier (Ampere ARM, 24GB RAM).</li>
+                        <li>Setup Docker Compose, Nginx, and SSL for secure routing.</li>
+                        <li>Initialize FastAPI backend architecture.</li>
+                        <li>Integrate Swiss Ephemeris algorithm for planetary math.</li>
+                        <li>Build Sidereal (Lahiri) & Tropical coordinate conversion logic.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2 d-none d-md-block"></div>
+            <div class="col-md-5"></div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="row row-phase">
+            <div class="col-md-5 d-none d-md-block"></div>
+            <div class="col-md-2 d-none d-md-block"></div>
+            <div class="col-md-5">
+                <div class="phase-card">
+                    <div class="phase-number">WEEKS 4 - 7</div>
+                    <h3 class="phase-title text-neon-gold">AI Pipeline & Vector Engine</h3>
+                    <ul class="task-list">
+                        <li>Embed LanceDB into FastAPI (Persistent NVMe Volume).</li>
+                        <li>Ingest & tag multi-tenant knowledge base (Vedic, Western, KP).</li>
+                        <li>Setup LangChain / OpenRouter API connections.</li>
+                        <li>Develop the "4-D Prompt Framework" (Deconstruct, Diagnose, Develop, Deliver).</li>
+                        <li>Implement strict intent classification & metadata pre-filtering.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="row row-phase">
+            <div class="col-md-5 text-md-end mb-4 mb-md-0">
+                <div class="phase-card">
+                    <div class="phase-number">WEEKS 8 - 11</div>
+                    <h3 class="phase-title text-neon-gold">Next.js Web PWA & API Connect</h3>
+                    <ul class="task-list text-start">
+                        <li>Develop Next.js 14 responsive PWA.</li>
+                        <li>Build 4-Step Onboarding (Identity, Temporal, Spatial).</li>
+                        <li>Integrate Google Places API & TimezoneFinder for DST.</li>
+                        <li>Implement "Smart Default Assignment" based on global location.</li>
+                        <li>Integrate Lemon Squeezy for Web Subscriptions (Merchant of Record).</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2 d-none d-md-block"></div>
+            <div class="col-md-5"></div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="row row-phase">
+            <div class="col-md-5 d-none d-md-block"></div>
+            <div class="col-md-2 d-none d-md-block"></div>
+            <div class="col-md-5">
+                <div class="phase-card">
+                    <div class="phase-number">WEEKS 12 - 14</div>
+                    <h3 class="phase-title text-neon-gold">Flutter Mobile & Monetization</h3>
+                    <ul class="task-list">
+                        <li>Develop Flutter app for iOS & Android cross-platform.</li>
+                        <li>Replicate onboarding & chat UI for native mobile.</li>
+                        <li>Implement StoreKit 2 (Apple) & Google Play Billing.</li>
+                        <li>Setup Subscription Tiers: Free, Pro ($9.99), Ultra ($29.00).</li>
+                        <li>Implement "Human Verification" $9.99 marketplace upsell logic.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div class="row row-phase">
+            <div class="col-md-5 text-md-end mb-4 mb-md-0">
+                <div class="phase-card">
+                    <div class="phase-number">WEEKS 15 - 16</div>
+                    <h3 class="phase-title text-neon-gold">Guardrails, Testing & Launch</h3>
+                    <ul class="task-list text-start">
+                        <li>Apply automated safety filters and liability shields to prompts.</li>
+                        <li>Test hallucination prevention (rejecting queries without verified coordinates).</li>
+                        <li>Conduct localization testing (Sinhala, Hindi, Tamil loanwords).</li>
+                        <li>Submit apps to Apple App Store & Google Play Store.</li>
+                        <li>Soft launch to waitlist and scale up marketing.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2 d-none d-md-block"></div>
+            <div class="col-md-5"></div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
