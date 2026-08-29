@@ -1,261 +1,732 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AstroMatrix | Launch Roadmap</title>
-    
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    
-    <style>
-        :root {
-            --bg-dark: #050505;
-            --bg-card: #111111;
-            --neon-gold: #FFD700;
-            --neon-gold-dim: rgba(255, 215, 0, 0.15);
-            --text-light: #f8f9fa;
-            --text-muted: #a0a0a0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AstroMatrix | Solo Developer Launch Roadmap (Flutter First)</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts: Inter & Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            font-family: 'Inter', -apple-system, sans-serif;
-            overflow-x: hidden;
-        }
+  <style>
+    :root {
+      --bg-black: #050505;
+      --bg-card: #0d0d0d;
+      --bg-card-hover: #141414;
+      --bg-subtle: #1a1a1a;
+      --neon-gold: #FFD700;
+      --neon-gold-light: #FFF099;
+      --neon-gold-glow: rgba(255, 215, 0, 0.25);
+      --neon-gold-dim: rgba(255, 215, 0, 0.08);
+      --border-dark: #222222;
+      --border-gold: rgba(255, 215, 0, 0.35);
+      --text-main: #f8f9fa;
+      --text-muted: #9e9e9e;
+    }
 
-        /* Neon Gold Text Effects */
-        .text-neon-gold {
-            color: var(--neon-gold);
-            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5), 0 0 15px rgba(255, 215, 0, 0.3);
-        }
+    body {
+      background-color: var(--bg-black);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      padding-bottom: 90px;
+    }
 
-        /* Hero Section */
-        .hero-section {
-            padding: 4rem 0 3rem;
-            text-align: center;
-            border-bottom: 1px solid var(--neon-gold-dim);
-            background: radial-gradient(circle at top, var(--neon-gold-dim) 0%, transparent 60%);
-        }
+    /* Neon Gold Accents */
+    .text-gold {
+      color: var(--neon-gold) !important;
+    }
 
-        .hero-title {
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
+    .glow-gold-text {
+      color: var(--neon-gold);
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.4), 0 0 25px rgba(255, 215, 0, 0.2);
+    }
 
-        /* Roadmap Timeline */
-        .roadmap-container {
-            position: relative;
-            padding: 3rem 0;
-        }
+    .border-gold {
+      border-color: var(--border-gold) !important;
+    }
 
-        /* Center Line */
-        .roadmap-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent, var(--neon-gold), transparent);
-            z-index: 0;
-        }
+    /* Hero Section */
+    .hero-section {
+      background: radial-gradient(circle at 50% 0%, rgba(255, 215, 0, 0.12) 0%, rgba(5, 5, 5, 0) 70%);
+      border-bottom: 1px solid var(--border-dark);
+      padding: 4.5rem 0 3rem;
+    }
 
-        .phase-card {
-            background-color: var(--bg-card);
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 1.5rem;
-            position: relative;
-            z-index: 1;
-            transition: all 0.3s ease;
-        }
+    .spec-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--neon-gold-dim);
+      color: var(--neon-gold);
+      border: 1px solid var(--border-gold);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      box-shadow: 0 0 12px var(--neon-gold-glow);
+    }
 
-        .phase-card:hover {
-            border-color: var(--neon-gold);
-            box-shadow: 0 0 20px var(--neon-gold-dim);
-            transform: translateY(-5px);
-        }
+    /* Progress Widget */
+    .progress-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+    }
 
-        .phase-number {
-            display: inline-block;
-            background-color: var(--bg-dark);
-            color: var(--neon-gold);
-            border: 1px solid var(--neon-gold);
-            padding: 0.25rem 1rem;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-            box-shadow: 0 0 10px var(--neon-gold-dim);
-        }
+    .progress-bar-container {
+      background: var(--bg-subtle);
+      height: 8px;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
 
-        .phase-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
+    .progress-fill {
+      background: linear-gradient(90deg, #FFD700, #FFF099);
+      height: 100%;
+      width: 0%;
+      border-radius: 99px;
+      transition: width 0.35s ease;
+      box-shadow: 0 0 10px var(--neon-gold);
+    }
 
-        .task-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    /* Stage Navigation Tabs */
+    .stage-tabs-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 1020;
+      background: rgba(5, 5, 5, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-dark);
+      padding: 12px 0;
+    }
 
-        .task-list li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
+    .stage-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .stage-nav::-webkit-scrollbar { display: none; }
 
-        .task-list li::before {
-            content: '✦';
-            position: absolute;
-            left: 0;
-            color: var(--neon-gold);
-            font-size: 0.8rem;
-        }
+    .stage-tab-btn {
+      background: var(--bg-card);
+      color: var(--text-muted);
+      border: 1px solid var(--border-dark);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
 
-        /* Timeline alignment */
-        .row-phase {
-            margin-bottom: 3rem;
-        }
+    .stage-tab-btn:hover {
+      color: var(--text-main);
+      border-color: var(--text-muted);
+    }
 
-        @media (max-width: 768px) {
-            .roadmap-container::before {
-                left: 1rem;
-            }
-            .phase-card {
-                margin-left: 2rem;
-            }
-        }
-    </style>
+    .stage-tab-btn.active {
+      background: var(--neon-gold);
+      color: #000;
+      border-color: var(--neon-gold);
+      font-weight: 700;
+      box-shadow: 0 0 15px var(--neon-gold-glow);
+    }
+
+    /* Stage Sections */
+    .stage-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-radius: 14px;
+      margin-top: 2rem;
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+
+    .stage-card:hover {
+      border-color: var(--border-gold);
+    }
+
+    .stage-header {
+      padding: 1.5rem 1.75rem;
+      background: linear-gradient(90deg, rgba(255, 215, 0, 0.05) 0%, rgba(20, 20, 20, 0) 100%);
+      border-bottom: 1px solid var(--border-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .stage-tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: var(--neon-gold);
+      background: var(--neon-gold-dim);
+      border: 1px solid var(--border-gold);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .stage-body {
+      padding: 1.75rem;
+    }
+
+    /* Tasks Breakdown */
+    .task-block {
+      background-color: #080808;
+      border: 1px solid var(--border-dark);
+      border-left: 3px solid var(--neon-gold);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .task-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .task-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .task-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .task-list li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--neon-gold);
+      font-size: 0.75rem;
+    }
+
+    /* Interactive Checkbox */
+    .custom-check-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: var(--neon-gold-light);
+    }
+
+    .custom-check-input {
+      display: none;
+    }
+
+    .check-box-indicator {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 2px solid var(--border-gold);
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .custom-check-input:checked + .check-box-indicator {
+      background: var(--neon-gold);
+      border-color: var(--neon-gold);
+      color: #000;
+    }
+
+    .custom-check-input:checked + .check-box-indicator::after {
+      content: '✓';
+      font-size: 0.75rem;
+      font-weight: 900;
+    }
+
+    /* Key Architecture Summary Table */
+    .table-dark-custom {
+      background-color: transparent;
+      color: var(--text-main);
+      font-size: 0.88rem;
+    }
+
+    .table-dark-custom th {
+      background-color: var(--bg-subtle);
+      color: var(--neon-gold);
+      font-weight: 600;
+      border-color: var(--border-dark);
+      padding: 12px;
+    }
+
+    .table-dark-custom td {
+      border-color: var(--border-dark);
+      padding: 12px;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <h1 class="hero-title text-neon-gold">AstroMatrix</h1>
-            <p class="lead text-muted">16-Week Solo Developer Launch Roadmap</p>
-            <div class="d-inline-flex gap-3 mt-3">
-                <span class="badge border border-warning text-warning bg-transparent px-3 py-2">Oracle Cloud (ARM)</span>
-                <span class="badge border border-warning text-warning bg-transparent px-3 py-2">FastAPI + LanceDB</span>
-                <span class="badge border border-warning text-warning bg-transparent px-3 py-2">Flutter & Next.js</span>
-            </div>
+  <!-- Hero Header -->
+  <header class="hero-section">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <div class="spec-badge mb-3">
+            <i class="bi bi-stars"></i> Master Execution Specification
+          </div>
+          <h1 class="display-5 fw-extrabold glow-gold-text mb-2">AstroMatrix</h1>
+          <p class="lead text-muted mb-3">
+            Solo Developer Execution Blueprint: <strong class="text-white">Requirements &rarr; UI/UX &rarr; Backend Engine &rarr; Flutter Mobile Client</strong>.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge bg-black border border-gold text-gold py-2 px-3">Primary: Flutter (iOS/Android)</span>
+            <span class="badge bg-black border border-secondary text-light py-2 px-3">Backend: FastAPI & LanceDB</span>
+            <span class="badge bg-black border border-secondary text-light py-2 px-3">Oracle Cloud ARM Always-Free</span>
+          </div>
         </div>
+
+        <div class="col-lg-5">
+          <div class="progress-card">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <span class="text-muted small fw-bold">SOLO LAUNCH PROGRESS</span>
+              <span id="progress-percentage" class="text-gold fw-bold">0%</span>
+            </div>
+            <div class="progress-bar-container">
+              <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <div class="d-flex justify-content-between mt-3 text-muted small">
+              <span>Total Tasks: <strong id="total-tasks-count" class="text-white">0</strong></span>
+              <span>Completed: <strong id="completed-tasks-count" class="text-gold">0</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Stage Navigation -->
+  <nav class="stage-tabs-wrapper">
+    <div class="container">
+      <div class="stage-nav">
+        <button class="stage-tab-btn active" onclick="filterStage('all', this)">All Stages</button>
+        <button class="stage-tab-btn" onclick="filterStage('stage-1', this)">Stage 1: Requirements</button>
+        <button class="stage-tab-btn" onclick="filterStage('stage-2', this)">Stage 2: UI/UX Design</button>
+        <button class="stage-tab-btn" onclick="filterStage('stage-3', this)">Stage 3: Core Astronomy & Server</button>
+        <button class="stage-tab-btn" onclick="filterStage('stage-4', this)">Stage 4: AI RAG & Prompt Engine</button>
+        <button class="stage-tab-btn" onclick="filterStage('stage-5', this)">Stage 5: Flutter Mobile App</button>
+        <button class="stage-tab-btn" onclick="filterStage('stage-6', this)">Stage 6: Monetization & Store Launch</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Roadmap Container -->
+  <main class="container my-4">
+
+    <!-- ================= STAGE 1 ================= -->
+    <section class="stage-card" id="stage-1">
+      <div class="stage-header">
+        <div>
+          <h2 class="h5 fw-bold text-white mb-1"><i class="bi bi-file-earmark-check text-gold me-2"></i>Stage 1: Requirements Finalization & System Architecture</h2>
+          <p class="text-muted small mb-0">Define mathematical rules, coordinate decoupling logic, and RAG schemas before coding.</p>
+        </div>
+        <span class="stage-tag">EST: WEEK 1</span>
+      </div>
+      <div class="stage-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="task-block">
+              <div class="task-title"><i class="bi bi-compass text-gold"></i> Astronomical Rules & Coordinate Decoupling</div>
+              <ul class="task-list">
+                <li>Formulate decoupling logic: Physical planetary degrees separate from cultural house systems.</li>
+                <li>Establish Sidereal (Lahiri) vs. Tropical (0° Ayanamsa) mathematical conversion standards.</li>
+                <li>Draft 4-Step Intake Logic: Name/Gender, Temporal (DOB/Time with 12:00 PM toggle), Spatial (Latitude, Longitude, DST via TimezoneFinder).</li>
+                <li>Formulate the smart default assignment: South Asian coordinates &rarr; Sidereal (Whole Sign), Western coordinates &rarr; Tropical (Placidus).</li>
+              </ul>
+              <label class="custom-check-label">
+                <input type="checkbox" class="custom-check-input" onchange="calculateProgress()">
+                <span class="check-box-indicator"></span>
+                <span>Mark Task Completed</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="task-block">
+              <div class="task-title"><i class="bi bi-diagram-3 text-gold"></i> Vector DB Schema & Multi-Tenant Rules</div>
+              <ul class="task-list">
+                <li>Define LanceDB table schema for tradition metadata partitioning (<code>vedic</code>, <code>western</code>, <code>kp_system</code>, <code>lal_kitab</code>).</li>
+                <li>Design 4-D Prompt Framework rules: Deconstruct &rarr; Diagnose &rarr; Develop &rarr; Deliver.</li>
+                <li>Lock localization strategy: Preserve technical terms (Lagnaya, Dasha, Kendra) for Sinhala, Hindi, and Tamil queries.</li>
+                <li>Document strict safety guardrails and disclaimer templates for predictive liabilities.</li>
+              </ul>
+              <label class="custom-check-label">
+                <input type="checkbox" class="custom-check-input" onchange="calculateProgress()">
+                <span class="check-box-indicator"></span>
+                <span>Mark Task Completed</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Roadmap Section -->
-    <div class="container roadmap-container">
-        
-        <!-- Phase 1 -->
-        <div class="row row-phase">
-            <div class="col-md-5 text-md-end mb-4 mb-md-0">
-                <div class="phase-card">
-                    <div class="phase-number">WEEKS 1 - 3</div>
-                    <h3 class="phase-title text-neon-gold">Infrastructure & Core Math</h3>
-                    <ul class="task-list text-start">
-                        <li>Provision Oracle Cloud Always-Free Tier (Ampere ARM, 24GB RAM).</li>
-                        <li>Setup Docker Compose, Nginx, and SSL for secure routing.</li>
-                        <li>Initialize FastAPI backend architecture.</li>
-                        <li>Integrate Swiss Ephemeris algorithm for planetary math.</li>
-                        <li>Build Sidereal (Lahiri) & Tropical coordinate conversion logic.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-2 d-none d-md-block"></div>
-            <div class="col-md-5"></div>
+    <!-- ================= STAGE 2 ================= -->
+    <section class="stage-card" id="stage-2">
+      <div class="stage-header">
+        <div>
+          <h2 class="h5 fw-bold text-white mb-1"><i class="bi bi-palette text-gold me-2"></i>Stage 2: Comprehensive UI/UX Design & Prototyping (Figma)</h2>
+          <p class="text-muted small mb-0">Build the high-contrast dark theme design system and all native mobile flow screens.</p>
         </div>
-
-        <!-- Phase 2 -->
-        <div class="row row-phase">
-            <div class="col-md-5 d-none d-md-block"></div>
-            <div class="col-md-2 d-none d-md-block"></div>
-            <div class="col-md-5">
-                <div class="phase-card">
-                    <div class="phase-number">WEEKS 4 - 7</div>
-                    <h3 class="phase-title text-neon-gold">AI Pipeline & Vector Engine</h3>
-                    <ul class="task-list">
-                        <li>Embed LanceDB into FastAPI (Persistent NVMe Volume).</li>
-                        <li>Ingest & tag multi-tenant knowledge base (Vedic, Western, KP).</li>
-                        <li>Setup LangChain / OpenRouter API connections.</li>
-                        <li>Develop the "4-D Prompt Framework" (Deconstruct, Diagnose, Develop, Deliver).</li>
-                        <li>Implement strict intent classification & metadata pre-filtering.</li>
-                    </ul>
-                </div>
+        <span class="stage-tag">EST: WEEKS 2 - 3</span>
+      </div>
+      <div class="stage-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="task-block">
+              <div class="task-title"><i class="bi bi-brush text-gold"></i> Mobile Design System & UI Kit</div>
+              <ul class="task-list">
+                <li>Create Figma color tokens: Obsidian Black (<code>#050505</code>), Deep Card (<code>#0d0d0d</code>), Champion Neon Gold (<code>#FFD700</code>).</li>
+                <li>Establish typography scale optimized for mobile readability (Inter & sans-serif fonts).</li>
+                <li>Design responsive components: Neon gold pill badges, glowing CTA buttons, and status chips.</li>
+                <li>Build interactive Astrological Chart UI components: North Indian diamond chart, South Indian box chart, and Western circular wheel.</li>
+              </ul>
+              <label class="custom-check-label">
+                <input type="checkbox" class="custom-check-input" onchange="calculateProgress()">
+                <span class="check-box-indicator"></span>
+                <span>Mark Task Completed</span>
+              </label>
             </div>
-        </div>
+          </div>
 
-        <!-- Phase 3 -->
-        <div class="row row-phase">
-            <div class="col-md-5 text-md-end mb-4 mb-md-0">
-                <div class="phase-card">
-                    <div class="phase-number">WEEKS 8 - 11</div>
-                    <h3 class="phase-title text-neon-gold">Next.js Web PWA & API Connect</h3>
-                    <ul class="task-list text-start">
-                        <li>Develop Next.js 14 responsive PWA.</li>
-                        <li>Build 4-Step Onboarding (Identity, Temporal, Spatial).</li>
-                        <li>Integrate Google Places API & TimezoneFinder for DST.</li>
-                        <li>Implement "Smart Default Assignment" based on global location.</li>
-                        <li>Integrate Lemon Squeezy for Web Subscriptions (Merchant of Record).</li>
-                    </ul>
-                </div>
+          <div class="col-md-6">
+            <div class="task-block">
+              <div class="task-title"><i class="bi bi-phone text-gold"></i> Core Mobile Screen Mockups</div>
+              <ul class="task-list">
+                <li>Design 4-Step Intake onboarding screens (Progress steps, Places search, Time toggle).</li>
+                <li>Design Dashboard: Daily transit forecast, active planetary periods (Dasha), and quick action cards.</li>
+                <li>Design Conversational AI Chat screen with streaming response bubble effects.</li>
+                <li>Design Relationship Synastry & Compatibility 2-Person comparison UI.</li>
+                <li>Design Monetization Paywall & Subscription upgrade modal (Free vs. Pro $9.99 vs. Ultra $29.00).</li>
+              </ul>
+              <label class="custom-check-label">
+                <input type="checkbox" class="custom-check-input" onchange="calculateProgress()">
+                <span class="check-box-indicator"></span>
+                <span>Mark Task Completed</span>
+              </label>
             </div>
-            <div class="col-md-2 d-none d-md-block"></div>
-            <div class="col-md-5"></div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Phase 4 -->
-        <div class="row row-phase">
-            <div class="col-md-5 d-none d-md-block"></div>
-            <div class="col-md-2 d-none d-md-block"></div>
-            <div class="col-md-5">
-                <div class="phase-card">
-                    <div class="phase-number">WEEKS 12 - 14</div>
-                    <h3 class="phase-title text-neon-gold">Flutter Mobile & Monetization</h3>
-                    <ul class="task-list">
-                        <li>Develop Flutter app for iOS & Android cross-platform.</li>
-                        <li>Replicate onboarding & chat UI for native mobile.</li>
-                        <li>Implement StoreKit 2 (Apple) & Google Play Billing.</li>
-                        <li>Setup Subscription Tiers: Free, Pro ($9.99), Ultra ($29.00).</li>
-                        <li>Implement "Human Verification" $9.99 marketplace upsell logic.</li>
-                    </ul>
-                </div>
+    <!-- ================= STAGE 3 ================= -->
+    <section class="stage-card" id="stage-3">
+      <div class="stage-header">
+        <div>
+          <h2 class="h5 fw-bold text-white mb-1"><i class="bi bi-server text-gold me-2"></i>Stage 3: Core Astronomical Engine & Zero-Cost Infrastructure</h2>
+          <p class="text-muted small mb-0">Build the offline Swiss Ephemeris wrapper and deploy on Oracle Cloud Always-Free ARM.</p>
+        </div>
+        <span class="stage-tag">EST: WEEKS 4 - 6</span>
+      </div>
+      <div class="stage-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="task-block">
+              <div class="task-title"><i class="bi bi-cloud-check text-gold"></i> Oracle Cloud (OCI) & Server Setup</div>
+              <ul class="task-list">
+                <li>Provision Oracle Cloud Always-Free Ampere ARM instance (4 OCPUs, 24 GB RAM, 200 GB NVMe).</li>
+                <li>Configure Docker Compose, Nginx reverse proxy, and automated SSL (Let's Encrypt).</li>
+                <li>Set up FastAPI production environment with Uvicorn worker pools.</li>
+                <li>Set up persistent NVMe storage mounts for vector files and cache directories.</li>
+              </ul>
+              <label class="custom-check-label">
+                <input type="checkbox" class="custom-check-input" onchange="calculateProgress()">
+                <span class="check-box-indicator"></span>
+                <span>Mark Task Completed</span>
+              </label>
             </div>
-        </div>
+          </div>
 
-        <!-- Phase 5 -->
-        <div class="row row-phase">
-            <div class="col-md-5 text-md-end mb-4 mb-md-0">
-                <div class="phase-card">
-                    <div class="phase-number">WEEKS 15 - 16</div>
-                    <h3 class="phase-title text-neon-gold">Guardrails, Testing & Launch</h3>
-                    <ul class="task-list text-start">
-                        <li>Apply automated safety filters and liability shields to prompts.</li>
-                        <li>Test hallucination prevention (rejecting queries without verified coordinates).</li>
-                        <li>Conduct localization testing (Sinhala, Hindi, Tamil loanwords).</li>
-                        <li>Submit apps to Apple App Store & Google Play Store.</li>
-                        <li>Soft launch to waitlist and scale up marketing.</li>
-                    </ul>
-                </div>
+          <div class="col-md-6">
+            <div class="task-block">
+              <div class="task-title"><i class="bi bi-calculator text-gold"></i> Custom Python Ephemeris Engine</div>
+              <ul class="task-list">
+                <li>Integrate Swiss Ephemeris algorithms for planetary longitudes, latitudes, and house cusps.</li>
+                <li>Implement Lahiri Ayanamsa computation for Sidereal and 0° for Tropical calculations.</li>
+                <li>Integrate <code>TimezoneFinder</code> and <code>pytz</code> for historical DST offset lookups.</li>
+                <li>Create unit tests verifying planetary coordinate outputs against official astronomical benchmarks.</li>
+              </ul>
+              <label class="custom-check-label">
+                <input type="checkbox" class="custom-check-input" onchange="calculateProgress()">
+                <span class="check-box-indicator"></span>
+                <span>Mark Task Completed</span>
+              </label>
             </div>
-            <div class="col-md-2 d-none d-md-block"></div>
-            <div class="col-md-5"></div>
+          </div>
         </div>
+      </div>
+    </section>
 
+    <!-- ================= STAGE 4 ================= -->
+    <section class="stage-card" id="stage-4">
+      <div class="stage-header">
+        <div>
+          <h2 class="h5 fw-bold text-white mb-1"><i class="bi bi-cpu text-gold me-2"></i>Stage 4: Multi-Tenant Vector Search & AI Language Pipeline</h2>
+          <p class="text-muted small mb-0">Integrate LanceDB, metadata pre-filters, and LLM reasoning prompts with hallucination shields.</p>
+        </div>
+        <span class="stage-tag">EST: WEEKS 7 - 9</span>
+      </div>
+      <div class="stage-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="task-block">
+              <div class="task-title"><i class="bi bi-database text-gold"></i> LanceDB Ingestion & Pre-Filtering</div>
+              <ul class="task-list">
+                <li>Embed LanceDB directly inside FastAPI process to eliminate network latency.</li>
+                <li>Ingest knowledge base tagged strictly with astrological school metadata.</li>
+                <li>Implement query intent routing: Query &rarr; Intent Classification &rarr; Metadata Pre-Filter (e.g. <code>school == "vedic"</code>).</li>
+                <li>Optimize chunking and cosine similarity index for lightning-fast retrieval on NVMe.</li>
+              </ul>
+              <label class="custom-check-label">
+                <input type="checkbox" class="custom-check-input" onchange="calculateProgress()">
+                <span class="check-box-indicator"></span>
+                <span>Mark Task Completed</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="task-block">
+              <div class="task-title"><i class="bi bi-chat-left-dots text-gold"></i> 4-D Prompting & Safety Shields</div>
+              <ul class="task-list">
+                <li>Implement 4-D prompt engine (Deconstruct, Diagnose, Develop, Deliver).</li>
+                <li>Connect OpenRouter / LangChain with Claude 3.5 Sonnet and cost-effective backup models.</li>
+                <li>Implement Hallucination Blocker: Automatically reject interpretations if coordinates are incomplete.</li>
+                <li>Add localization filter: Keep native astrological technical terms intact for regional languages.</li>
+              </ul>
+              <label class="custom-check-label">
+                <input type="checkbox" class="custom-check-input" onchange="calculateProgress()">
+                <span class="check-box-indicator"></span>
+                <span>Mark Task Completed</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STAGE 5 ================= -->
+    <section class="stage-card" id="stage-5">
+      <div class="stage-header">
+        <div>
+          <h2 class="h5 fw-bold text-white mb-1"><i class="bi bi-phone-flip text-gold me-2"></i>Stage 5: Flutter Mobile Client Development (Primary Platform)</h2>
+          <p class="text-muted small mb-0">Build the cross-platform mobile application for iOS and Android.</p>
+        </div>
+        <span class="stage-tag">EST: WEEKS 10 - 13</span>
+      </div>
+      <div class="stage-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="task-block">
+              <div class="task-title"><i class="bi bi-layers text-gold"></i> Flutter Architecture & Onboarding</div>
+              <ul class="task-list">
+                <li>Initialize Flutter project with state management (Riverpod/Bloc) and clean architecture.</li>
+                <li>Build the 4-step onboarding flow with Google Places API autocomplete for birth cities.</li>
+                <li>Implement smart default tradition assignment based on selected country/coordinates.</li>
+                <li>Implement local secure storage for user profile caching and offline birth data access.</li>
+              </ul>
+              <label class="custom-check-label">
+                <input type="checkbox" class="custom-check-input" onchange="calculateProgress()">
+                <span class="check-box-indicator"></span>
+                <span>Mark Task Completed</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="task-block">
+              <div class="task-title"><i class="bi bi-chat-square-text text-gold"></i> Interactive Charts & Streaming Chat</div>
+              <ul class="task-list">
+                <li>Build custom painter / rendering widgets for North/South Indian charts & Western wheels.</li>
+                <li>Build real-time streaming chat UI with markdown rendering for AI reading outputs.</li>
+                <li>Implement Relationship Compatibility (Synastry) screen for dual-profile calculations.</li>
+                <li>Implement PDF report generator for exporting charts and AI summaries.</li>
+              </ul>
+              <label class="custom-check-label">
+                <input type="checkbox" class="custom-check-input" onchange="calculateProgress()">
+                <span class="check-box-indicator"></span>
+                <span>Mark Task Completed</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STAGE 6 ================= -->
+    <section class="stage-card" id="stage-6">
+      <div class="stage-header">
+        <div>
+          <h2 class="h5 fw-bold text-white mb-1"><i class="bi bi-rocket-takeoff text-gold me-2"></i>Stage 6: In-App Monetization, Store Submission & Launch</h2>
+          <p class="text-muted small mb-0">Integrate StoreKit 2 & Google Play Billing, run compliance checks, and launch to stores.</p>
+        </div>
+        <span class="stage-tag">EST: WEEKS 14 - 16</span>
+      </div>
+      <div class="stage-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="task-block">
+              <div class="task-title"><i class="bi bi-credit-card text-gold"></i> In-App Purchases & Upsells</div>
+              <ul class="task-list">
+                <li>Implement Apple In-App Purchase (StoreKit 2) and Google Play Billing subscriptions.</li>
+                <li>Wire tiered feature gates: Free (3 queries/day), Pro ($9.99/mo), Ultra ($29.00/mo).</li>
+                <li>Build "Human Astrologer Voice Note" verification checkout flow ($9.99 one-time upsell).</li>
+                <li>Implement receipt verification backend endpoint to prevent subscription bypass.</li>
+              </ul>
+              <label class="custom-check-label">
+                <input type="checkbox" class="custom-check-input" onchange="calculateProgress()">
+                <span class="check-box-indicator"></span>
+                <span>Mark Task Completed</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="task-block">
+              <div class="task-title"><i class="bi bi-shield-check text-gold"></i> Compliance, Store Submission & Launch</div>
+              <ul class="task-list">
+                <li>Append mandatory legal disclaimers and entertainment disclosures across all AI outputs.</li>
+                <li>Conduct end-to-end regression testing on physical iOS and Android devices.</li>
+                <li>Prepare app store assets: Screenshots, privacy policy, and metadata.</li>
+                <li>Submit to Apple App Store & Google Play Console, resolve review feedback, and launch!</li>
+              </ul>
+              <label class="custom-check-label">
+                <input type="checkbox" class="custom-check-input" onchange="calculateProgress()">
+                <span class="check-box-indicator"></span>
+                <span>Mark Task Completed</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Summary Table -->
+    <div class="mt-5 p-4 border border-dark rounded-4 bg-black">
+      <h3 class="h6 fw-bold text-gold text-uppercase mb-3"><i class="bi bi-gear-wide-connected me-2"></i>AstroMatrix Technical Blueprint Reference</h3>
+      <div class="table-responsive">
+        <table class="table table-dark-custom mb-0">
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Technologies</th>
+              <th>Key Implementation Focus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-gold fw-bold">Primary Client</td>
+              <td>Flutter (Dart)</td>
+              <td>Cross-platform native iOS & Android, Custom Chart Painters, In-App Subscriptions</td>
+            </tr>
+            <tr>
+              <td class="text-gold fw-bold">Backend Services</td>
+              <td>Python, FastAPI, Docker</td>
+              <td>Swiss Ephemeris wrapper, TimezoneFinder, 4-D Prompt pipeline</td>
+            </tr>
+            <tr>
+              <td class="text-gold fw-bold">Vector Database</td>
+              <td>LanceDB (Embedded)</td>
+              <td>Multi-tenant tradition partitioning (Vedic, Western, KP, Lal Kitab)</td>
+            </tr>
+            <tr>
+              <td class="text-gold fw-bold">Infrastructure</td>
+              <td>Oracle Cloud Always-Free</td>
+              <td>4 OCPUs, 24 GB RAM ARM instance, Nginx reverse proxy, SSL</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </main>
+
+  <!-- JavaScript for Interactive Filtering and Progress Tracking -->
+  <script>
+    // Tab Filter
+    function filterStage(stageId, btn) {
+      document.querySelectorAll('.stage-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.stage-card');
+      if (stageId === 'all') {
+        cards.forEach(c => c.style.display = 'block');
+      } else {
+        cards.forEach(c => {
+          c.style.display = (c.id === stageId) ? 'block' : 'none';
+        });
+      }
+    }
+
+    // Interactive Progress Tracker with LocalStorage persistence
+    function calculateProgress() {
+      const checkboxes = document.querySelectorAll('.custom-check-input');
+      const total = checkboxes.length;
+      let checked = 0;
+
+      const savedState = [];
+      checkboxes.forEach((cb, i) => {
+        if (cb.checked) {
+          checked++;
+          savedState.push(i);
+        }
+      });
+
+      localStorage.setItem('astromatrix_tasks', JSON.stringify(savedState));
+
+      const percentage = total > 0 ? Math.round((checked / total) * 100) : 0;
+      document.getElementById('progress-fill').style.width = percentage + '%';
+      document.getElementById('progress-percentage').innerText = percentage + '%';
+      document.getElementById('total-tasks-count').innerText = total;
+      document.getElementById('completed-tasks-count').innerText = checked;
+    }
+
+    // Load saved progress on launch
+    document.addEventListener('DOMContentLoaded', () => {
+      const checkboxes = document.querySelectorAll('.custom-check-input');
+      const savedState = JSON.parse(localStorage.getItem('astromatrix_tasks') || '[]');
+
+      savedState.forEach(index => {
+        if (checkboxes[index]) checkboxes[index].checked = true;
+      });
+
+      calculateProgress();
+    });
+  </script>
 </body>
 </html>
